@@ -34,7 +34,7 @@ func (e *engine) Schemas(ctx context.Context) ([]string, error) {
 	}
 
 	if err := rows.Err(); err != nil {
-		return nil, fmt.Errorf("row iteration error: %w", err)
+		return nil, fmt.Errorf("failed to iterate over schema rows: %w", err)
 	}
 
 	return schemas, nil
