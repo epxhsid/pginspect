@@ -15,5 +15,5 @@ type Engine interface {
 	Ping(ctx context.Context) error
 	Schemas(ctx context.Context) ([]string, error)
 	Tables(ctx context.Context, schema string) ([]string, error)
-	TableData(ctx context.Context, schema, table string, limit int) (TableData, error)
+	TableData(ctx context.Context, schema, table string, limit int) (*TableData, error)
 }
