@@ -1,13 +1,29 @@
 package httpui
 
 import (
+	_ "embed"
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/epxhsid/pginspect/engine"
 )
 
+//go:embed ui.html
+var uiHTML []byte
+
 func Mount(mux *http.ServeMux, prefix string, eng engine.Engine) {
+	mux.HandleFunc(prefix+"/", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		html := string(uiHTML)
+		html = strings.ReplaceAll(html, "/__db/", prefix+"/")
+		w.Write([]byte(html))
+	})
+
+	mux.HandleFunc(prefix, func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, prefix+"/", http.StatusPermanentRedirect)
+	})
+
 	mux.HandleFunc(prefix+"/ping", func(w http.ResponseWriter, r *http.Request) {
 		if err := eng.Ping(r.Context()); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -30,6 +46,7 @@ func Mount(mux *http.ServeMux, prefix string, eng engine.Engine) {
 
 	mux.HandleFunc(prefix+"/tables", func(w http.ResponseWriter, r *http.Request) {
 		schema := r.URL.Query().Get("schema")
+		fmt.Println("Tables handler hit for schema:", schema)
 		tables, err := eng.Tables(r.Context(), schema)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
