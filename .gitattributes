@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Normalize line endings for Go source files to LF (Linux/Unix style)
+*.go text eol=lf
