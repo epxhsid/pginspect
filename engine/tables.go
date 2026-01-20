@@ -22,7 +22,7 @@ func (e *engine) Tables(ctx context.Context, schema string) ([]string, error) {
 		ORDER BY table_name
 	`
 
-	rows, err := e.pool.Query(ctx, query)
+	rows, err := e.pool.Query(ctx, query, schema)
 	if err != nil {
 		return nil, fmt.Errorf("failed to query tables for schema %q: %w", schema, err)
 	}
