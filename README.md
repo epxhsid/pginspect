@@ -1,3 +1,9 @@
+# pginspect
+
+![CI](https://github.com/epxhsid/pginspect/actions/workflows/go.yml/badge.svg)
+![Go Version](https://img.shields.io/badge/go-1.25.4+-blue)
+![License](https://img.shields.io/github/license/epxhsid/pginspect)
+
 lightweight Go library for inspecting pgSQL database in a browser.  
 where it provides a simple UI to view schemas, tables, and table data via REST endpoints
 
