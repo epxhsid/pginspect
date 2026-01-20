@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>pgui</title>
+        <script src="https://unpkg.com/htmx.org@2.0.8/dist/htmx.min.js"></script>
+        <style>
+            body {
+                font-family: sans-serif;
+                margin: 0;
+                display: flex;
+                height: 100vh;
+            }
+            aside {
+                width: 240px;
+                border-right: 1px solid #ddd;
+                padding: 8px;
+            }
+            main {
+                flex: 1;
+                padding: 8px;
+                overflow: auto;
+            }
+            ul {
+                list-style: none;
+                padding: 0;
+            }
+            li {
+                cursor: pointer;
+                padding: 4px;
+            }
+            li:hover {
+                background: #eee;
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            th,
+            td {
+                border: 1px solid #ccc;
+                padding: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <aside hx-get="/__db/schemas" hx-trigger="load" hx-target="#schemas">
+            <strong>Schemas</strong>
+            <ul id="schemas"></ul>
+        </aside>
+
+        <main>
+            <h3>Tables</h3>
+            <ul id="tables"></ul>
+            <hr />
+            <div id="tabledata"></div>
+        </main>
+    </body>
+</html>
