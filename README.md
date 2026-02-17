@@ -31,7 +31,7 @@ httpui.Mount(mux, endpoint, eng)
 
 3. Access it via your defined endpoint, in this case:
 ```markdown
-http://ADDRESS:PORT/__db # replace __db with your endpoint
+http://ADDRESS:PORT/__db // replace __db with your endpoint
 ```
 
 ## Note
