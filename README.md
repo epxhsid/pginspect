@@ -17,20 +17,21 @@ go mod tidy # needed to retrieve other dependencies
 1. Configuration example
 ```go
 eng, err := engine.NewConn(context.Background(), &engine.Options{
-		Addr:     os.Getenv("DATABASE_URL"),
+		Addr:     os.Getenv("postgres://user:pass@host:port/dbname"),
 		MaxRows:  100,
 		ReadOnly: true,
 })
 ```
 2. Mount endpoint example
 ```go
+endpoint := "/__db"
 mux := http.NewServeMux()
-httpui.Mount(mux, "/__db", eng)
+httpui.Mount(mux, endpoint, eng)
 ```
 
 3. Access it via your defined endpoint, in this case:
 ```markdown
-http://ADDRESS:PORT/__db
+http://ADDRESS:PORT/__db # replace __db with your endpoint
 ```
 
 ## Note
